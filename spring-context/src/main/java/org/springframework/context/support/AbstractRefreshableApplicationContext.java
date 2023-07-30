@@ -119,14 +119,18 @@ public abstract class AbstractRefreshableApplicationContext extends AbstractAppl
 	 */
 	@Override
 	protected final void refreshBeanFactory() throws BeansException {
+		// 如果存在 Bean 工厂，销毁所属的所有 Bean，然后销毁 Bean 工厂
 		if (hasBeanFactory()) {
 			destroyBeans();
 			closeBeanFactory();
 		}
 		try {
+			// 创建 Bean 工厂
 			DefaultListableBeanFactory beanFactory = createBeanFactory();
+			// 设置序列 ID，用于反序列化成对应的 Bean 工厂
 			beanFactory.setSerializationId(getId());
 			customizeBeanFactory(beanFactory);
+			// 加载 Bean 定义（可以通过 xml、annotation 等）
 			loadBeanDefinitions(beanFactory);
 			this.beanFactory = beanFactory;
 		}
@@ -212,9 +216,11 @@ public abstract class AbstractRefreshableApplicationContext extends AbstractAppl
 	 * @see DefaultListableBeanFactory#setAllowEagerClassLoading
 	 */
 	protected void customizeBeanFactory(DefaultListableBeanFactory beanFactory) {
+		// 如果定义一个接口的多个子类时，一个子类可以任意覆盖其它的子类，最后只有一个（任意的）子类
 		if (this.allowBeanDefinitionOverriding != null) {
 			beanFactory.setAllowBeanDefinitionOverriding(this.allowBeanDefinitionOverriding);
 		}
+		// 允许 BeanFactory 中的 Bean 相互引用
 		if (this.allowCircularReferences != null) {
 			beanFactory.setAllowCircularReferences(this.allowCircularReferences);
 		}

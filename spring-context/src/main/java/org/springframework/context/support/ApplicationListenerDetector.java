@@ -43,6 +43,9 @@ import org.springframework.util.ObjectUtils;
  * @author Juergen Hoeller
  * @since 4.3.4
  */
+/**
+ * 主要发现实现 ApplicationListener 接口的 Bean，然后加入 ApplicationContext 的 EventMulticaster 容器中
+ */
 class ApplicationListenerDetector implements DestructionAwareBeanPostProcessor, MergedBeanDefinitionPostProcessor {
 
 	private static final Log logger = LogFactory.getLog(ApplicationListenerDetector.class);

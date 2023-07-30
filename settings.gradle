@@ -3,7 +3,15 @@ pluginManagement {
 		mavenCentral()
 		gradlePluginPortal()
 		maven { url "https://repo.spring.io/release" }
-	}
+		maven {
+			url "https://repo.spring.io/release"
+		}
+		maven {
+			url "https://repository.jboss.org/maven2"
+		}
+        google()
+
+    }
 }
 
 plugins {

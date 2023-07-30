@@ -58,6 +58,10 @@ import org.springframework.util.StringValueResolver;
  * @see org.springframework.context.ApplicationContextAware
  * @see org.springframework.context.support.AbstractApplicationContext#refresh()
  */
+
+/**
+ * 负责处理 aware 相关实现类的接口方法
+ */
 class ApplicationContextAwareProcessor implements BeanPostProcessor {
 
 	private final ConfigurableApplicationContext applicationContext;

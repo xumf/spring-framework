@@ -241,6 +241,7 @@ public abstract class AbstractBeanFactory extends FactoryBeanRegistrySupport imp
 			String name, @Nullable Class<T> requiredType, @Nullable Object[] args, boolean typeCheckOnly)
 			throws BeansException {
 
+		// 获取真实的 bean 名称。如果 bean 是 BeanFactory 类型，前缀会带上"&"，这里负责去掉"&"前缀
 		String beanName = transformedBeanName(name);
 		Object beanInstance;
 
@@ -1811,6 +1812,7 @@ public abstract class AbstractBeanFactory extends FactoryBeanRegistrySupport imp
 			mbd.isFactoryBean = true;
 		}
 		else {
+			// 查看缓存中是否有对象 FactoryBean 创建的对象
 			object = getCachedObjectForFactoryBean(beanName);
 		}
 		if (object == null) {

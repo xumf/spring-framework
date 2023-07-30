@@ -73,13 +73,15 @@ public class DefaultSingletonBeanRegistry extends SimpleAliasRegistry implements
 	/** Maximum number of suppressed exceptions to preserve. */
 	private static final int SUPPRESSED_EXCEPTIONS_LIMIT = 100;
 
-
+	// 一级缓存，存储完整状态的 bean 实例
 	/** Cache of singleton objects: bean name to bean instance. */
 	private final Map<String, Object> singletonObjects = new ConcurrentHashMap<>(256);
 
+	// 三级缓存，存储 Bean 的工厂 ObjectFactory
 	/** Cache of singleton factories: bean name to ObjectFactory. */
 	private final Map<String, ObjectFactory<?>> singletonFactories = new HashMap<>(16);
 
+	// 二级缓存，存储半成品状态的 bean 实例，可以解决直接赋值给依赖对象
 	/** Cache of early singleton objects: bean name to bean instance. */
 	private final Map<String, Object> earlySingletonObjects = new ConcurrentHashMap<>(16);
 
@@ -179,20 +181,29 @@ public class DefaultSingletonBeanRegistry extends SimpleAliasRegistry implements
 	@Nullable
 	protected Object getSingleton(String beanName, boolean allowEarlyReference) {
 		// Quick check for existing instance without full singleton lock
+		// 从一级缓存获取单例对象
 		Object singletonObject = this.singletonObjects.get(beanName);
 		if (singletonObject == null && isSingletonCurrentlyInCreation(beanName)) {
+			// 从二级缓存中获取单例对象
 			singletonObject = this.earlySingletonObjects.get(beanName);
 			if (singletonObject == null && allowEarlyReference) {
+				// 加完整对象锁
 				synchronized (this.singletonObjects) {
 					// Consistent creation of early reference within full singleton lock
+					// 从一级缓存获取单例对象
 					singletonObject = this.singletonObjects.get(beanName);
 					if (singletonObject == null) {
+						// 从二级缓存中获取单例对象
 						singletonObject = this.earlySingletonObjects.get(beanName);
 						if (singletonObject == null) {
+							// 从二级缓存中获取 ObjectFactory
 							ObjectFactory<?> singletonFactory = this.singletonFactories.get(beanName);
 							if (singletonFactory != null) {
+								// 通过 ObjectFactory 创建对象
 								singletonObject = singletonFactory.getObject();
+								// 将对象加入二级缓存
 								this.earlySingletonObjects.put(beanName, singletonObject);
+								// 删除 Bean 的三级缓存
 								this.singletonFactories.remove(beanName);
 							}
 						}

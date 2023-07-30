@@ -205,6 +205,9 @@ final class PostProcessorRegistrationDelegate {
 		beanFactory.clearMetadataCache();
 	}
 
+	/**
+	 * BeanPostProcessor 执行优先级实现{@link PriorityOrdered} > 实现{@link Ordered} > 没有实现 {@link Ordered} 与 {@link PriorityOrdered}
+	 */
 	public static void registerBeanPostProcessors(
 			ConfigurableListableBeanFactory beanFactory, AbstractApplicationContext applicationContext) {
 
@@ -284,6 +287,7 @@ final class PostProcessorRegistrationDelegate {
 
 		// Re-register post-processor for detecting inner beans as ApplicationListeners,
 		// moving it to the end of the processor chain (for picking up proxies etc).
+		// 添加 ApplicationListenerDetector 探测器，探测所有的实现 ApplicationListener 接口的Bean，并注册到广播器容器中
 		beanFactory.addBeanPostProcessor(new ApplicationListenerDetector(applicationContext));
 	}
 

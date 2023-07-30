@@ -412,6 +412,9 @@ public abstract class AbstractAutowireCapableBeanFactory extends AbstractBeanFac
 	}
 
 	@Override
+	/**
+	 * 触发实现 {@link BeanPostProcessor} 的 Bean 的 postProcessBeforeInitialization 方法
+	 */
 	public Object applyBeanPostProcessorsBeforeInitialization(Object existingBean, String beanName)
 			throws BeansException {
 
@@ -427,6 +430,9 @@ public abstract class AbstractAutowireCapableBeanFactory extends AbstractBeanFac
 	}
 
 	@Override
+	/**
+	 * 触发实现 {@link BeanPostProcessor} 的 Bean 的 postProcessAfterInitialization 方法
+	 */
 	public Object applyBeanPostProcessorsAfterInitialization(Object existingBean, String beanName)
 			throws BeansException {
 
