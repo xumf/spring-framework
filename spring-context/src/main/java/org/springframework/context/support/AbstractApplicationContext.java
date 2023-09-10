@@ -593,7 +593,7 @@ public abstract class AbstractApplicationContext extends DefaultResourceLoader
 
 				// 注册初始化所有实现 {@link BeanPostProcessor} 的 Bean
 				// Register bean processors that intercept bean creation.
-				  registerBeanPostProcessors(beanFactory);
+				registerBeanPostProcessors(beanFactory);
 				beanPostProcess.end();
 
 				// 初始化这上下文的消息源
