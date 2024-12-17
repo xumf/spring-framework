@@ -124,6 +124,10 @@ import org.springframework.util.CollectionUtils;
  * @author Sam Brannen
  * @since 3.0
  */
+
+/**
+ * 负责处理 {@link @Configuration} 注解使用类的处理
+ */
 public class ConfigurationClassPostProcessor implements BeanDefinitionRegistryPostProcessor,
 		BeanRegistrationAotProcessor, BeanFactoryInitializationAotProcessor, PriorityOrdered,
 		ResourceLoaderAware, ApplicationStartupAware, BeanClassLoaderAware, EnvironmentAware {

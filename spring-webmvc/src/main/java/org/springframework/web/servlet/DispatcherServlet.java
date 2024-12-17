@@ -1031,6 +1031,7 @@ public class DispatcherServlet extends FrameworkServlet {
 		});
 	}
 
+	// 实际执行调度功能
 	/**
 	 * Process the actual dispatching to the handler.
 	 * <p>The handler will be obtained by applying the servlet's HandlerMappings in order.

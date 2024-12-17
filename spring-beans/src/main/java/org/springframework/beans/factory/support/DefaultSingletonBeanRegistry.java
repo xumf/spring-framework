@@ -196,7 +196,7 @@ public class DefaultSingletonBeanRegistry extends SimpleAliasRegistry implements
 						// 从二级缓存中获取单例对象
 						singletonObject = this.earlySingletonObjects.get(beanName);
 						if (singletonObject == null) {
-							// 从二级缓存中获取 ObjectFactory
+							// 从三级缓存中获取 ObjectFactory
 							ObjectFactory<?> singletonFactory = this.singletonFactories.get(beanName);
 							if (singletonFactory != null) {
 								// 通过 ObjectFactory 创建对象

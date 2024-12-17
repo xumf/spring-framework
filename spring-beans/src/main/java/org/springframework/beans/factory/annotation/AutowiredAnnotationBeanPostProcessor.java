@@ -151,6 +151,12 @@ import org.springframework.util.StringUtils;
  * @see Autowired
  * @see Value
  */
+
+/**
+ * 负责处理
+ * @Autowired 注解
+ * @Value 注解
+ */
 public class AutowiredAnnotationBeanPostProcessor implements SmartInstantiationAwareBeanPostProcessor,
 		MergedBeanDefinitionPostProcessor, BeanRegistrationAotProcessor, PriorityOrdered, BeanFactoryAware {
 

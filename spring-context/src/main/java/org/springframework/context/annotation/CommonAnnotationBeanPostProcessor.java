@@ -125,6 +125,13 @@ import org.springframework.util.StringValueResolver;
  * @see org.springframework.beans.factory.annotation.InitDestroyAnnotationBeanPostProcessor
  * @see org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor
  */
+
+/**
+ * 处理下列三个注解
+ * {@link @javax.annotation.Resource}
+ * {@link jakarta.annotation.PostConstruct}
+ * {@link jakarta.annotation.PreDestroy}
+ */
 @SuppressWarnings("serial")
 public class CommonAnnotationBeanPostProcessor extends InitDestroyAnnotationBeanPostProcessor
 		implements InstantiationAwareBeanPostProcessor, BeanFactoryAware, Serializable {

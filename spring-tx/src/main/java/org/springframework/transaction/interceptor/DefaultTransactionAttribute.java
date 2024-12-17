@@ -36,7 +36,7 @@ import org.springframework.util.StringValueResolver;
  * @since 16.03.2003
  */
 @SuppressWarnings("serial")
-public class DefaultTransactionAttribute extends DefaultTransactionDefinition implements TransactionAttribute {
+public class  DefaultTransactionAttribute extends DefaultTransactionDefinition implements TransactionAttribute {
 
 	@Nullable
 	private String descriptor;
